@@ -1,0 +1,57 @@
+<html>
+<head>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <input type="button" value="reset" onclick="game.reset()">
+    <div class="scoreboard">
+        <div id="xScore"></div>
+        <div id="oScore"></div>
+    </div>
+<div class="gameContainer">
+    <div class="gameSpace">
+        <div class="marker" id="0" onclick="game.makeTurn(0)"></div>
+    </div>
+    <div class="gameSpace">
+        <div class="marker" id="1" onclick="game.makeTurn(1)"></div>
+    </div>
+    <div class="gameSpace">
+        <div class="marker" id="2" onclick="game.makeTurn(2)"></div>
+    </div>
+    <div class="gameSpace">
+        <div class="marker"id="3" onclick="game.makeTurn(3)"></div>
+    </div>
+    <div class="gameSpace">
+        <div class="marker" id="4" onclick="game.makeTurn(4)"></div>
+    </div>
+    <div class="gameSpace">
+        <div class="marker" id="5" onclick="game.makeTurn(5)"></div>
+    </div>
+    <div class="gameSpace">
+        <div class="marker" id="6" onclick="game.makeTurn(6)"></div>
+    </div>
+    <div class="gameSpace">
+        <div class="marker" id="7" onclick="game.makeTurn(7)"></div>
+    </div>
+    <div class="gameSpace">
+        <div class="marker" id="8" onclick="game.makeTurn(8)"></div>
+    </div>
+</div>
+
+<div class="whiteOut">
+    <div class="playerForm">
+        <form>
+            <input type="text" placeholder="player X" id="playerX" required><br>
+            <input type="text" placeholder="player O" id="playerO" required><br>
+            <input type="button" value="Start Game!" onclick="game.newGame()">
+        </form>
+
+    </div>
+</div>
+
+
+
+
+</body>
+<script src="script.js"></script>
+</html>

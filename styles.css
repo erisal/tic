@@ -1,0 +1,48 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.gameContainer {
+    display: grid;
+    width: 69vh;
+    margin: auto;
+    grid-template-columns: repeat(auto-fill, minmax(33.33%, 1fr))
+
+}
+
+.gameSpace {
+    border: 1px solid gray;
+    padding-top: 100%;
+    position: relative;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: 21vh;
+}
+
+
+.gameSpace .marker {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+.winnerText {
+    color:crimson;
+
+}
+
+.empty:hover {
+    background: rgb(180, 189, 226);
+}
+
+.whiteOut {
+    visibility: hidden;
+
+}
+
+.showForm {
+    visibility: visible;
+}
