@@ -1,14 +1,81 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
+    font-weight: 900;
+}
+.masterContainer {
+    margin: auto;
+    display: grid;
+    width: 85vh;
+    grid-template-columns: 8vh 69vh 8vh;
+    text-align: center;
+
+}
+#left {
+    position: relative;
 }
 
+#resetGame{
+    position: absolute;
+    bottom: 6vh;
+    right: -4vh;
+}
 
+#right {
+
+}
+
+.btn {
+    background-color: white;
+    border-radius: 0px;
+    border: 1px solid lightslategray;
+    font-family: 'Raleway', sans-serif;
+    font-size: 2.5vh;
+    font-weight:200;
+    padding: .25vh;
+}
+.btn:hover {
+    background-color: lightgray;
+}
+
+.scoreboard{
+    width: 69vh;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 4vh;
+    border: none;
+
+}
+.messages{
+    width: 69vh;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 4vh;
+    border: none;
+    visibility: hidden;
+}
+#nextRound {
+    text-align: right;
+    padding-top: 1vh;
+    margin: 0px;
+}
+#winnerNotice {
+    color: crimson;
+}
+#oScore {
+    text-align: right;
+}
 .gameContainer {
     display: grid;
+    border: 2px solid black;
     width: 69vh;
     margin: auto;
     grid-template-columns: repeat(auto-fill, minmax(33.33%, 1fr))
 
+}
+#resetBtn{
+    transform: rotate(-90deg);
 }
 
 .gameSpace {
@@ -17,7 +84,8 @@ body {
     position: relative;
     box-sizing: border-box;
     text-align: center;
-    font-size: 21vh;
+    font-size: 20vh;
+    font-family: 'Raleway', sans-serif;
 }
 
 
@@ -40,7 +108,23 @@ body {
 
 .whiteOut {
     visibility: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    padding-top: 20%;
+    z-index: 2;
+}
 
+.playerForm {
+    width: 30vh;
+    z-index: 4;
+    opacity: 100%;
+    height: 15vh;
+    margin: auto;
+    padding: 2vh;
+    background: lightgrey;
 }
 
 .showForm {

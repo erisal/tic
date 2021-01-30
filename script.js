@@ -21,15 +21,26 @@
             let players = board.getPlayers();
             playerX = players[0];
             playerO = players[1];
+            if (playerX == '') playerX = "X";
+            if (playerO == '') palyerY = "O";
+
             board.updateScoreboard(playerX, playerO);
             gameOver = false;
         };
+
+        const nextRound = () => {
+            board.resetBoard();
+            board.toggleRoundOver();
+            gameOver = false;
+        }
 
         const makeTurn = (space) => {
             if (gameOver) return;
 
             board.setMarker(space, playerTurn);
-
+            toggleTurn();
+            
+            
             // check if 3 in a row, if so, get array with spaces that win
             gameOver = board.checkWinner();
 
@@ -40,9 +51,24 @@
                 winner.upScore();
                 board.declareWinner(winner.getName(), gameOver.slice(1));
                 board.updateScoreboard(playerX, playerO);
-                gameOver = false;
+                board.toggleRoundOver();
+                gameOver = true;
+                playerTurn = 'X';
+                return;
             }
-            toggleTurn();
+
+            //check for tie
+            if (board.checkTie()) {
+                playerX.upScore();
+                playerO.upScore();
+                board.declareTie();
+                board.updateScoreboard(playerX, playerO);
+                board.toggleRoundOver();
+                gameOver = true;
+                playerTurn = 'X';
+                return;
+            }
+            
 
         };
 
@@ -57,12 +83,11 @@
             else playerTurn = 'X';
         };
 
-
-
         return {
             makeTurn,
             reset,
-            newGame
+            newGame,
+            nextRound
         };        
 
 
@@ -76,6 +101,7 @@
 const board = (() => {
 
     let boardArray = ['e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e'];
+    let winnerNotice = document.getElementById('winnerNotice');
 
     const setMarker = (space, mark) => {
         if (boardArray[space] != 'e') return false;
@@ -83,6 +109,7 @@ const board = (() => {
             boardArray[space] = mark;
             let spaceDiv = document.getElementById(space);
             spaceDiv.textContent = mark;
+            spaceDiv.classList.remove('empty');
             return true;
         }
     };
@@ -93,15 +120,26 @@ const board = (() => {
             let winningDiv = document.getElementById(item);
             winningDiv.classList.toggle('winnerText');
         }     
-        alert(`${winner} wins!`); 
+        winnerNotice.textContent = `${winner} WINS!`;
     };
+
+    const declareTie = () => {
+        winnerNotice.textContent = `TIE!`;
+    }
 
     const resetBoard = () => {
         boardArray = ['e', 'e', 'e', 'e', 'e', 'e', 'e', 'e', 'e'];
         let spaceDivs = document.getElementsByClassName('marker');
         for (let item of spaceDivs) {
             item.textContent = '';
+            item.classList.add('empty');
             item.classList.remove('winnerText');
+        }
+    };
+
+    const checkTie = () => {
+        if (boardArray.indexOf('e') < 0) {
+            return true;
         }
     };
 
@@ -128,11 +166,18 @@ const board = (() => {
         form.classList.toggle('showForm');
     };
 
+    const toggleRoundOver = () => {
+        let form = document.querySelector('.messages');
+        form.classList.toggle('showForm');
+    }
+
     const getPlayers = () => {
         let playerXName = document.getElementById('playerX').value;
         let playerOName = document.getElementById('playerO').value;
-        let playerX = Player('human', playerXName);
-        let playerO = Player('human', playerOName);
+        if (playerXName == '') playerXName = 'X';
+        if (playerOName == '') playerOName = 'O';
+        let playerX = Player('human', playerXName.toUpperCase());
+        let playerO = Player('human', playerOName.toUpperCase());
         return [playerX, playerO];
     }
 
@@ -147,22 +192,16 @@ const board = (() => {
         setMarker,
         resetBoard,
         checkWinner,
+        checkTie,
         declareWinner,
+        declareTie,
         toggleForm,
         getPlayers,
-        updateScoreboard
+        updateScoreboard,
+        toggleRoundOver
     };
 
 })();
-
-
-    // initlize with array, all values 'e' (empty)
-    // update array with x or o
-    // check if winner
-
-// DISPLAY CONTROLLER
-    // initialize/reset board to empty, all spaces available
-    // update with x or o on move; disable onclick for space
 
 // PLAYERS
     // create player w/ name
